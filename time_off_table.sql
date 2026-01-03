@@ -19,5 +19,5 @@ CREATE TABLE IF NOT EXISTS `time_off` (
   KEY `status` (`status`),
   KEY `start_date` (`start_date`),
   CONSTRAINT `time_off_ibfk_1` FOREIGN KEY (`employee_id`) REFERENCES `employees` (`employee_id`) ON DELETE CASCADE
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 

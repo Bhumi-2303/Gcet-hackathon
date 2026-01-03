@@ -255,15 +255,7 @@ document.addEventListener('DOMContentLoaded', function() {
     });
     
     document.getElementById('viewProfileBtn').addEventListener('click', () => {
-        openEmployeeModal({
-            first_name: currentUserData.name.split(' ')[0],
-            last_name: currentUserData.name.split(' ')[1] || '',
-            title: 'Current User',
-            email: currentUserData.email,
-            phone: 'N/A',
-            date_of_joining: 'N/A',
-            status: 'present'
-        });
+        window.location.href = 'profile.php';
     });
 
     // --- Initial Setup ---

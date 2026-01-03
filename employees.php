@@ -56,6 +56,7 @@ $stmt = $pdo->prepare("
         e.last_name,
         e.email,
         e.phone,
+        e.gender,
         e.date_of_joining,
         r.role_name,
         u.login_id
@@ -155,6 +156,7 @@ $success = isset($_GET['success']) ? htmlspecialchars($_GET['success']) : '';
             <th>Name</th>
             <th>Email</th>
             <th>Phone</th>
+            <th>Gender</th>
             <th>Role</th>
             <th>Date of Joining</th>
             <th>Login ID</th>
@@ -167,6 +169,7 @@ $success = isset($_GET['success']) ? htmlspecialchars($_GET['success']) : '';
             <td><?php echo htmlspecialchars($emp['first_name'] . ' ' . $emp['last_name']); ?></td>
             <td><?php echo htmlspecialchars($emp['email'] ?? 'N/A'); ?></td>
             <td><?php echo htmlspecialchars($emp['phone'] ?? 'N/A'); ?></td>
+            <td><?php echo htmlspecialchars($emp['gender'] ?? 'N/A'); ?></td>
             <td><?php echo htmlspecialchars($emp['role_name'] ?? 'N/A'); ?></td>
             <td><?php echo htmlspecialchars($emp['date_of_joining']); ?></td>
             <td><?php echo htmlspecialchars($emp['login_id'] ?? 'N/A'); ?></td>
@@ -215,6 +218,18 @@ $success = isset($_GET['success']) ? htmlspecialchars($_GET['success']) : '';
             <input type="date" name="date_of_joining" required value="<?php echo date('Y-m-d'); ?>">
           </div>
           <div class="form-group">
+            <label>Gender <span class="required">*</span></label>
+            <select name="gender" required>
+              <option value="">Select Gender</option>
+              <option value="Male">Male</option>
+              <option value="Female">Female</option>
+              <option value="Other">Other</option>
+            </select>
+          </div>
+        </div>
+        
+        <div class="form-row">
+          <div class="form-group">
             <label>Role <span class="required">*</span></label>
             <select name="role_id" required>
               <option value="">Select Role</option>
@@ -225,15 +240,129 @@ $success = isset($_GET['success']) ? htmlspecialchars($_GET['success']) : '';
               <?php endforeach; ?>
             </select>
           </div>
-        </div>
-        
-        <div class="form-row full">
           <div class="form-group">
             <label>Initial Password <span class="required">*</span></label>
-            <input type="password" name="password" required placeholder="Set temporary password for employee login" id="employeePassword">
+            <input type="password" name="password" required placeholder="Set temporary password" id="employeePassword">
             <small style="color: var(--muted); font-size: 12px; margin-top: 5px; display: block;">
-              Employee will use this password for first login. They should change it after logging in.
+              Employee will use this password for first login.
             </small>
+          </div>
+        </div>
+        
+        <div class="section-divider" style="margin: 20px 0; border-top: 2px solid #e6e9ef;"></div>
+        <h3 style="margin: 20px 0 15px 0; color: #0f172a;">Salary Information</h3>
+        
+        <div class="form-row">
+          <div class="form-group">
+            <label>Monthly Wage (₹) <span class="required">*</span></label>
+            <input type="number" name="monthly_wage" step="0.01" min="0" required placeholder="50000" value="50000">
+          </div>
+          <div class="form-group">
+            <label>Yearly Wage (₹) <span class="required">*</span></label>
+            <input type="number" name="yearly_wage" step="0.01" min="0" required placeholder="600000" value="600000">
+          </div>
+        </div>
+        
+        <div class="form-row">
+          <div class="form-group">
+            <label>Working Days per Week</label>
+            <input type="number" name="working_days_per_week" step="0.1" min="0" max="7" placeholder="5" value="5">
+          </div>
+          <div class="form-group">
+            <label>Break Time (hours)</label>
+            <input type="number" name="break_time_hours" step="0.01" min="0" placeholder="1" value="1">
+          </div>
+        </div>
+        
+        <h4 style="margin: 20px 0 15px 0; color: #334155; font-size: 16px;">Salary Components</h4>
+        
+        <div class="form-row">
+          <div class="form-group">
+            <label>Basic Salary (₹)</label>
+            <input type="number" name="basic_salary" step="0.01" min="0" placeholder="25000" value="25000">
+          </div>
+          <div class="form-group">
+            <label>Basic Salary %</label>
+            <input type="number" name="basic_salary_percent" step="0.01" min="0" max="100" placeholder="50" value="50.00">
+          </div>
+        </div>
+        
+        <div class="form-row">
+          <div class="form-group">
+            <label>HRA (₹)</label>
+            <input type="number" name="hra" step="0.01" min="0" placeholder="12500" value="12500">
+          </div>
+          <div class="form-group">
+            <label>HRA %</label>
+            <input type="number" name="hra_percent" step="0.01" min="0" max="100" placeholder="50" value="50.00">
+          </div>
+        </div>
+        
+        <div class="form-row">
+          <div class="form-group">
+            <label>Standard Allowance (₹)</label>
+            <input type="number" name="standard_allowance" step="0.01" min="0" placeholder="4167" value="4167">
+          </div>
+          <div class="form-group">
+            <label>Standard Allowance %</label>
+            <input type="number" name="standard_allowance_percent" step="0.01" min="0" max="100" placeholder="16.67" value="16.67">
+          </div>
+        </div>
+        
+        <div class="form-row">
+          <div class="form-group">
+            <label>Performance Bonus (₹)</label>
+            <input type="number" name="performance_bonus" step="0.01" min="0" placeholder="2082.50" value="2082.50">
+          </div>
+          <div class="form-group">
+            <label>Performance Bonus %</label>
+            <input type="number" name="performance_bonus_percent" step="0.01" min="0" max="100" placeholder="8.33" value="8.33">
+          </div>
+        </div>
+        
+        <div class="form-row">
+          <div class="form-group">
+            <label>LTA (₹)</label>
+            <input type="number" name="lta" step="0.01" min="0" placeholder="2082.50" value="2082.50">
+          </div>
+          <div class="form-group">
+            <label>LTA %</label>
+            <input type="number" name="lta_percent" step="0.01" min="0" max="100" placeholder="8.33" value="8.33">
+          </div>
+        </div>
+        
+        <div class="form-row">
+          <div class="form-group">
+            <label>Fixed Allowance (₹)</label>
+            <input type="number" name="fixed_allowance" step="0.01" min="0" placeholder="2918" value="2918">
+          </div>
+          <div class="form-group">
+            <label>Professional Tax (₹)</label>
+            <input type="number" name="professional_tax" step="0.01" min="0" placeholder="200" value="200">
+          </div>
+        </div>
+        
+        <h4 style="margin: 20px 0 15px 0; color: #334155; font-size: 16px;">Provident Fund (PF)</h4>
+        
+        <div class="form-row">
+          <div class="form-group">
+            <label>PF Employee (₹)</label>
+            <input type="number" name="pf_employee" step="0.01" min="0" placeholder="3000" value="3000">
+          </div>
+          <div class="form-group">
+            <label>PF Employee %</label>
+            <input type="number" name="pf_employee_percent" step="0.01" min="0" max="100" placeholder="12" value="12.00">
+          </div>
+        </div>
+        
+        <div class="form-row">
+          <div class="form-group">
+            <label>PF Employer (₹)</label>
+            <input type="number" name="pf_employer" step="0.01" min="0" placeholder="3000" value="3000">
+          </div>
+          <div class="form-group">
+            <label>PF Employer %</label>
+            <input type="number" name="pf_employer_percent" step="0.01" min="0" max="100" placeholder="12" value="12.00">
           </div>
         </div>
         
@@ -256,21 +385,45 @@ $success = isset($_GET['success']) ? htmlspecialchars($_GET['success']) : '';
     });
     
     // Form validation
-    document.getElementById('addEmployeeForm').addEventListener('submit', function(e) {
-      const password = document.getElementById('employeePassword').value;
-      if (password.length < 6) {
-        e.preventDefault();
-        alert('Password must be at least 6 characters long.');
-        return false;
+    const addEmployeeForm = document.getElementById('addEmployeeForm');
+    if (addEmployeeForm) {
+      addEmployeeForm.addEventListener('submit', function(e) {
+        const password = document.getElementById('employeePassword').value;
+        if (password.length < 6) {
+          e.preventDefault();
+          alert('Password must be at least 6 characters long.');
+          return false;
+        }
+      });
+      
+      // Auto-calculate yearly wage from monthly wage
+      const monthlyWageInput = addEmployeeForm.querySelector('input[name="monthly_wage"]');
+      const yearlyWageInput = addEmployeeForm.querySelector('input[name="yearly_wage"]');
+      
+      if (monthlyWageInput && yearlyWageInput) {
+        monthlyWageInput.addEventListener('input', function() {
+          const monthly = parseFloat(this.value) || 0;
+          yearlyWageInput.value = (monthly * 12).toFixed(2);
+        });
       }
-    });
+    }
     
     // Show modal when button is clicked
-    document.querySelector('.btn.primary').addEventListener('click', function() {
-      document.getElementById('addEmployeeModal').classList.add('open');
-      // Reset form
-      document.getElementById('addEmployeeForm').reset();
-    });
+    const addEmployeeBtn = document.querySelector('.btn.primary');
+    if (addEmployeeBtn) {
+      addEmployeeBtn.addEventListener('click', function() {
+        document.getElementById('addEmployeeModal').classList.add('open');
+        // Reset form
+        if (addEmployeeForm) {
+          addEmployeeForm.reset();
+          // Reset date to today
+          const dateInput = addEmployeeForm.querySelector('input[name="date_of_joining"]');
+          if (dateInput) {
+            dateInput.value = new Date().toISOString().split('T')[0];
+          }
+        }
+      });
+    }
   </script>
 </body>
 </html>

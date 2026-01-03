@@ -4,7 +4,7 @@
 define('DB_HOST', '127.0.0.1');
 define('DB_NAME', 'hrms');
 define('DB_USER', 'root');
-define('DB_PASS', 'root');
+define('DB_PASS', '');
 
 define('DB_DSN', 'mysql:host=' . DB_HOST . ';dbname=' . DB_NAME . ';charset=utf8mb4');
 

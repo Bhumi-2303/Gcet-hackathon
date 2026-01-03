@@ -11,5 +11,5 @@ CREATE TABLE IF NOT EXISTS `attendance` (
   KEY `employee_id` (`employee_id`),
   KEY `created_at` (`created_at`),
   CONSTRAINT `attendance_ibfk_1` FOREIGN KEY (`employee_id`) REFERENCES `employees` (`employee_id`) ON DELETE CASCADE
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
