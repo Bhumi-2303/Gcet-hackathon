@@ -28,7 +28,6 @@ $success = isset($_GET['success']) ? htmlspecialchars($_GET['success']) : '';
       <?php endif; ?>
 
       <form action="auth/register.php" method="post" enctype="multipart/form-data" novalidate>
-        <p class="hint">All fields are required.</p>
         <div class="form-grid">
           <label class="field">
             <span class="label">Company Name <span class="required">*</span></span>

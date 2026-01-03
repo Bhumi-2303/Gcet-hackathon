@@ -37,12 +37,18 @@ try {
   $log->execute([':uid' => $row['user_id'], ':ip' => $_SERVER['REMOTE_ADDR'] ?? null, ':st' => 'SUCCESS']);
 
   $_SESSION['user'] = [
+    'user_id' => $row['user_id'],
+    'employee_id' => $row['employee_id'],
+    'company_id' => $row['company_id'],
+    'role_id' => $row['role_id'] ?? null,
     'name' => trim(($row['first_name'] ?? '') . ' ' . ($row['last_name'] ?? '')),
     'company' => $row['company_name'] ?? '',
     'email' => $row['emp_email'] ?? '',
     'logo' => $row['logo_url'] ?? ''
   ];
-  header('Location: ../welcome.php');
+  // flash welcome message shown on dashboard
+  $_SESSION['flash_success'] = 'Welcome back, ' . ($_SESSION['user']['name'] ?? '');
+  header('Location: ../dashboard.php');
   exit;
 } catch (Exception $e) {
   error_log('Login error: ' . $e->getMessage());
