@@ -105,14 +105,12 @@ A modern, web-based Human Resource Management System built with PHP and MySQL. M
 
 ### Role-Based Features
 
-#### 👨‍💼 Administrator
+#### 👨‍💼 Administrator / HR Staff
 - Full system access
 - Manage all employees
 - View all attendance records
 - Approve/reject time-off requests
 - System configuration
-
-#### 👔 HR Staff
 - Manage employees
 - View all attendance records
 - Approve/reject time-off requests
