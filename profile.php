@@ -101,7 +101,7 @@ $allEmployees = $allEmployeesStmt->fetchAll(PDO::FETCH_ASSOC);
           <a href="dashboard.php">Employees</a>
           <a href="attendance.php">Attendance</a>
           <a href="timeoff.php">Time Off</a>
-          <?php if ($isAdmin): ?>
+          <?php if (in_array($userRole, ['ADMIN', 'HR'])): ?>
           <a href="employees.php">Manage</a>
           <?php endif; ?>
           <a href="profile.php" class="active">My Profile</a>
